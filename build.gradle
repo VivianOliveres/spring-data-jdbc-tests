@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "io.freefair.lombok" version "5.1.0"
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+}
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:29.0-jre'
+
+    // Tests
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+    testImplementation 'org.mockito:mockito-core:3.3.3'
+    testImplementation 'org.assertj:assertj-core:3.15.0'
+
+    // Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    // JDBC
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'org.springframework.data:spring-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'com.tests.spring.data.jdbc.App'
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+}
